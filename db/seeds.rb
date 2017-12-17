@@ -34,3 +34,23 @@ Exercise.create(name: "Power Clean", olympic_weightlifting: true, description: "
 Exercise.create(name: "Snatch", olympic_weightlifting: true, description: "", video_link: "https://www.youtube.com/watch?v=9xQp2sldyts")
 Exercise.create(name: "Mountain Climbers", olympic_weightlifting: nil, description: "", video_link: "")
 Exercise.create(name: "Shoulder Press", olympic_weightlifting: nil, description: "", video_link: "https://www.youtube.com/watch?v=xe19t2_6yis")
+
+
+
+Workout.create(name: "TABATA",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 0, default_rounds: 0 )
+
+Workout.create(name: "EMOM",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "METCON",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "Olympic Weightlifting",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "Warm Up",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "Murph",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "Karen",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "Chipper",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
+
+Workout.create(name: "WOD",  default_duration_work: 20, default_duration_rest: 10, default_duration_total: 300, default_reps: 12, default_rounds: 5 )
