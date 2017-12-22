@@ -8,7 +8,7 @@ class V1::WorkoutsController < ApplicationController
   end
   def show
     workout_id = params[:id]
-    workout = Workout.find_by(id:  workout_id)
+    workout = Workout.find_by(id: params[:workout_id])
     render json: workout.as_json
   end 
   def create
@@ -24,7 +24,7 @@ class V1::WorkoutsController < ApplicationController
   end
   def update
     workout_id = paramns[:id]
-    workout = Workout.find_by(id: workout_id)
+    workout = Workout.find_by(id: params[:workout_id])
     workout.name = params[:name] || workout.name
     workout.default_duration_work = params [:default_duration_work] || workout.default_duration_work
     workout.default_duration_rest = params[:default_duration_rest] || workout.default_duration_rest
@@ -36,7 +36,7 @@ class V1::WorkoutsController < ApplicationController
   end
   def destroy
     workout_id = params[:id]
-    workout = Workout.find_by(id: workout_id)
+    workout = Workout.find_by(id: params[:workout_id])
     workout.destroy 
     render json: {message: "Workout successfully removed!!"}
   end
