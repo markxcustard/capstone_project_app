@@ -8,7 +8,7 @@ class V1::WorkoutsController < ApplicationController
   end
   def show
     workout_id = params[:id]
-    workout = Workout.find_by(id: params[:workout_id])
+    workout = Workout.find_by(id: workout_id)
     render json: workout.as_json
   end 
   def create

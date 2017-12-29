@@ -1,22 +1,25 @@
 class V1::ExercisesController < ApplicationController
-   def index
+  def index
     exercises = Exercise.all
     if params[:search]
       exercises = exercises.where("first_name ILIKE ?" , "%#{params[:search]}%")
     end
     render json: exercises.as_json
   end
+
   def show
     exercise_id = params[:id]
-    exercise = Exercise.find_by(id: params[:exercise_id])
+    exercise = Exercise.find_by(id: exercise_id)
     render json: exercise.as_json
-  end 
+  end
+
   def create
     exercise = Exercise.new(
-    name: params[:name],
-    olympic_weightlifting: params[:olympic_weightlifting],
-    description:  params[:description],
-    video_link: params[:video_link])
+      name: params[:name],
+      olympic_weightlifting: params[:olympic_weightlifting],
+      description:  params[:description],
+      video_link: params[:video_link]
+    )
     exercise.save
     render json: exercise.as_json
   end
@@ -30,11 +33,13 @@ class V1::ExercisesController < ApplicationController
     exercise.save
     render json: exercise.as_json
   end
-def destroy
-  exercise_id = params[:id]
-  exercise = Exercise.find_by(id: exercise_id)
-  exercise.destroy 
-  render json: {message: "Exercise successfully removed!!"}
-end
+
+  def destroy
+    exercise_id = params[:id]
+    exercise = Exercise.find_by(id: exercise_id)
+    exercise.destroy 
+    render json: {message: "Exercise successfully removed!!"}
+  end
+
 end
  
