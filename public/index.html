@@ -11,6 +11,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://maps.googleapis.com/maps/api/js?"></script>
   <script src="index.js" defer></script>
 </head>
 <body>
@@ -34,10 +35,10 @@
           Dropdown
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Sign Up</a>
-          <a class="dropdown-item" href="#">Login</a>
+          <a class="dropdown-item" href="/#/signup">Sign Up</a>
+          <a class="dropdown-item" href="/#/login">Login</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Logout</a>
+          <a class="dropdown-item" href="/#/logout">Logout</a>
         </div>
       </li>
       <li class="nav-item">
@@ -65,6 +66,7 @@
 <template id="home-page">
   <div class="container">
     <h1  class="text-white">Exercises</h1>
+     <div id="map"></div>
     <input type="text" v-model="titleFilter" placeholder="Search by exercise">
     <datalist id="name">
       <option v-for="exercise in exercises">{{ exercise.name }}</option>
@@ -124,23 +126,7 @@
     <ul>
       <li class="text-danger" v-for="error in errors">{{ error }}</li>
     </ul>
-     <div class="card-body bg-secondary text-white">
-            <h4 class="card-first name"> Name: {{ user.name }}</h4>
-            <p class="card-text ">Email: {{ user.email }}</p>
-            <p class="card-text email">Password: {{ user.password }}</p>
-            <p class="card-text email">Password Confirmation: {{ user.password_confirmation }}</p>
-            <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
-            <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
-              SignUp
-            </button>
-            <!-- <router-link v-bind:to="{ path: '/recipes/' + recipe.id }">More info</router-link> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <div class="form-group">
+    <div class="form-group">
       <label class=text-white>Name:</label> 
       <input type="text" class="form-control" v-model="name">
     </div>
@@ -157,7 +143,7 @@
       <input type="password" class="form-control" v-model="passwordConfirmation">
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
-  </div> -->
+  </div>
 </template>
 
 

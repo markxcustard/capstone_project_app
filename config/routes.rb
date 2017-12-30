@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  post 'user_token' => 'user_token#create'
   namespace :v1 do
     
     get "/users" => "users#index"
@@ -23,7 +24,6 @@ Rails.application.routes.draw do
     get "/exercise_workouts" => "exercise_workouts#index"
     post "/exercise_workouts" => "exercise_workouts#create"
     get "/exercise_workouts/:id" => "exercise_workouts#show"
-    patch "/exercise_workouts/:id" => "exercise_workouts#update"
     delete "/exercise_workouts/:id" => "exercise_workouts#destroy"
   end
 end

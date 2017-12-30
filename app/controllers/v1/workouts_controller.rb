@@ -14,11 +14,12 @@ class V1::WorkoutsController < ApplicationController
   def create
     workout = Workout.new(
     name: params[:name],
-    default_duration_work: params[:default_duration_work],
-    default_duration_rest:  params[:default_duration_rest],
-    default_duration_total: params[:default_duration_total],
-    default_reps: params[:default_reps],
-    default_rounds: params[:default_rounds])
+    duration_work: params[:duration_work],
+    duration_rest:  params[:duration_rest],
+    duration_total: params[:duration_total],
+    reps: params[:reps],
+    rounds: params[:rounds],
+    distance: params[:distance])
     workout.save
     render json: workout.as_json
   end
@@ -26,11 +27,12 @@ class V1::WorkoutsController < ApplicationController
     workout_id = paramns[:id]
     workout = Workout.find_by(id: params[:workout_id])
     workout.name = params[:name] || workout.name
-    workout.default_duration_work = params [:default_duration_work] || workout.default_duration_work
-    workout.default_duration_rest = params[:default_duration_rest] || workout.default_duration_rest
-    workout.default_duration_total = params[:default_duration_total] || workout.default_duration_total
-    workout.default_reps = params[:default_reps] || workout.default_reps
-    workout.default_rounds = params[:default_rounds] || workout.default_rounds
+    workout.duration_work = params [:duration_work] || workout.duration_work
+    workout.duration_rest = params[:duration_rest] || workout.duration_rest
+    workout.duration_total = params[:duration_total] || workout.duration_total
+    workout.reps = params[:reps] || workout.reps
+    workout.rounds = params[:rounds] || workout.rounds
+    workout.distance = params[:distance] || workout.distance
     workout.save
     render json: workout.as_json
   end

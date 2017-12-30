@@ -1,7 +1,8 @@
 require "unirest"
 require "pp"
 
-puts "Welcome to the CrossFit app!! Select an option"
+
+puts "Welcome to the Exercise App!! Select an option: "
 puts "[1] Show All Exercises: "
 puts "[2] Show All Workouts: "
 puts "[3] Show One Exercise: "
@@ -15,6 +16,9 @@ puts "[11]...................."
 puts "[Signup] "
 puts "[Login] "
 puts "[Logout] "
+puts "[q]"
+
+
 input_option = gets.chomp
 if input_option == "1"
   response = Unirest.get("http://localhost:3000/v1/exercises")
@@ -90,7 +94,7 @@ elsif input_option == "5"
     Unirest.clear_default_headers()
   elsif input_option == "q"
     puts "Goodbye!"
-    puts
+  
 end
 puts 
 puts "Press enter to continue"

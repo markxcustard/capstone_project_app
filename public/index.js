@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios */
+/* global Vue, VueRouter, axios, google */
 
 var HomePage = {
   template: "#home-page",
@@ -10,6 +10,20 @@ var HomePage = {
       titleFilter: ""
     };
   },
+
+  mounted: function() {
+    axios.get("/#").then(
+      function(response) {
+        this.exercise = response.data;
+      }.bind(this)
+    );
+    console.log(google);
+    var map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 41.8781, lng: -87.6298 },
+      zoom: 12
+    });
+  },
+
   created: function() {
     axios.get("/v1/exercises").then(
       function(response) {
@@ -50,7 +64,7 @@ var SignupPage = {
         password_confirmation: this.passwordConfirmation
       };
       axios
-        .post("/users", params)
+        .post("/v1/users", params)
         .then(function(response) {
           router.push("/login");
         })
@@ -111,9 +125,9 @@ var router = new VueRouter({
     // { path: "/recipes/:id", component: RecipesShowPage },
     // { path: "/recipes/:id/edit", component: RecipesEditPage },
     // { path: "/sample", component: SamplePage },
-    { path: "/v1/signup", component: SignupPage },
-    { path: "/v1/login", component: LoginPage },
-    { path: "/v1/logout", component: LogoutPage }
+    { path: "/signup", component: SignupPage },
+    { path: "/login", component: LoginPage },
+    { path: "/logout", component: LogoutPage }
   ]
 });
 
