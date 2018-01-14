@@ -25,14 +25,30 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+
+        <a class="nav-link" href="/#/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Main Info
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/#/exercises">Exercises</a>
+          <a class="dropdown-item" href="/#/workouts">Workouts</a>
+          <a class="dropdown-item" href="/#/exercise_workouts">Exercise Workouts</a>
+          <a class="dropdown-item" href="/#/random_exercises">Random Exercises</a>
+          <a class="dropdown-item" href="/#/random_workouts">Random Workouts</a>
+          
+          <div class="dropdown-divider"></div>
+          
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User Info
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/#/signup">Sign Up</a>
@@ -56,75 +72,20 @@
 </body>
 </html>
 
-<!-- <template id="home-page">
-  <div class="container">
-    <h1>{{ message }}</h1>
-    <p>{{ contacts }}</p>
-  </div>
-</template> -->
 
 <template id="home-page">
   <div class="container">
     <h1  class="text-white">Home Page</h1>
 
-    <!--  <div id="map"></div>
-    <input type="text" v-model="titleFilter" placeholder="Search by exercise">
-    <datalist id="name">
-      <option v-for="exercise in exercises">{{ exercise.name }}</option>
-    </datalist>
-
-    <div class="row" is="transition-group" name="fade">
-
-      <div class="col-md-4" v-for="exercise in exercises" v-if="isValidExercise(exercise)" v-bind:key="exercise.id">
-        <div class="card mb-2">
-          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
-       <!--    <div class="card-body bg-secondary text-white">
-            <h4 class="card-first name"> Name: {{ exercise.name }}</h4>
-            <p class="card-text ">Description: {{ exercise.description }}</p>
-            <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
-            <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
-      <!--       <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
-           <!--  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
-              Exercise Information
-            </button> -->
-            <!-- <router-link v-bind:to="{ path: '/recipes/' + recipe.id }">More info</router-link> -->
-  <!--         </div>
-        </div>
-      </div>
-    </div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-         {{ currentExercise.name }}
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{ currentExercise.name }}
-        <iframe width="420" height="315"
-          src="https://www.youtube.com/embed/XGSy3_Czz8k">
-        </iframe>
-        {{ currentExercise.video_link }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+     <div id="map"></div>
   </div>
-</div> --> --> -->
 
 </template>
 
 <template id="exercise-page">
   <div class="container">
     <h1  class="text-white">Exercises</h1>
-    <input type="text" v-model="titleFilter" placeholder="Search by exercise">
+    <input type="text" v-model="titleFilter" placeholder="Search by Exercise">
     <datalist id="name">
       <option v-for="exercise in exercises">{{ exercise.name }}</option>
     </datalist>
@@ -137,8 +98,8 @@
           <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
           <div class="card-body bg-secondary text-white">
             <h4 class="card-first name"> Name: {{ exercise.name }}</h4>
-            <p class="card-text ">Description: {{ exercise.description }}</p>
-            <p class="card-text email">Video Link: {{ exercise.video_link }}</p>
+            <!-- <p class="card-text ">Description: {{ exercise.description }}</p> -->
+           <!--  <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
             <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
             <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
@@ -154,23 +115,25 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
+        <h4 class="modal-title" id="exampleModalLabel">
          {{ currentExercise.name }}
-        </h5>
+        </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        {{ currentExercise.name }}
-        <iframe width="420" height="315"
-          src="https://www.youtube.com/embed/XGSy3_Czz8k">
+        {{ currentExercise.description }}
+        <br>
+        <br>
+        <iframe width="460" height="315"
+          v-bind:src="currentExercise.video_link">
         </iframe>
-        {{ currentExercise.video_link }}
+        <!-- {{ currentExercise.video_link }} -->
       </div>
+        
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -181,7 +144,7 @@
 <template id="workout-page">
   <div class="container">
     <h1  class="text-white">Workouts</h1>
-    <input type="text" v-model="titleFilter" placeholder="Search by exercise">
+    <input type="text" v-model="titleFilter" placeholder="Search by Workouts">
     <datalist id="name">
       <option v-for="workout in workouts">{{ workout.name }}</option>
     </datalist>
@@ -193,7 +156,7 @@
           <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
           <div class="card-body bg-secondary text-white">
             <h4 class="card-first name"> Name: {{ workout.name }}</h4>
-            <p class="card-text ">Description: {{ workout.description }}</p>
+           <!--  <p class="card-text ">Description: {{ workout.description }}</p> -->
           <!--   <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
             <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
             <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
@@ -211,7 +174,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-         {{ currentWorkout.name }}
+         {{ currentWorkout.description }}
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -226,7 +189,7 @@
       </div> -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <!--   <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>

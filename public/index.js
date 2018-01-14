@@ -12,9 +12,9 @@ var HomePage = {
   },
 
   mounted: function() {
-    axios.get("/#").then(
+    axios.get("/v1/exercises").then(
       function(response) {
-        this.exercise = response.data;
+        this.exercises = response.data;
       }.bind(this)
     );
     console.log(google);
@@ -120,7 +120,7 @@ var ExerciseWorkoutsPage = {
     };
   },
   mounted: function() {
-    axios.get("/v1/exercise_workouts").then(
+    axios.get("/v1/exercise_workouts?users_workouts=true").then(
       function(response) {
         console.log(response.data);
         this.exercise_workouts = response.data;

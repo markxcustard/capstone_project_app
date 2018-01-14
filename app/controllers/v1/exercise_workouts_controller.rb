@@ -4,9 +4,9 @@ class V1::ExerciseWorkoutsController < ApplicationController
     # if params[:searchExerciseId]
     #   exercise_workouts = exercise_workouts.where(" exercise_id = ?" , "%#{params[:searchExerciseId]}%")
     if params[:users_workouts]
+      exercise_workouts = ExerciseWorkout.all
       # exercise_workouts = exercise_workouts.where(user_id: current_user.id)
-      exercise_workouts = exercise_workouts.where(user_id: current_user.id)
-      exercise_workouts.sort
+      exercise_workouts.sort_by {|exercise_workout| exercise_workout[:created_at]}
     end
 
     render json: exercise_workouts.as_json
