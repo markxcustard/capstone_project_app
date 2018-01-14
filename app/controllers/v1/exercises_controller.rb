@@ -3,6 +3,9 @@ class V1::ExercisesController < ApplicationController
     exercises = Exercise.all
     if params[:search]
       exercises = exercises.where("first_name ILIKE ?" , "%#{params[:search]}%")
+    elsif params[:random]
+      exercise = Exercise.all
+      exercises = exercise.sample
     end
     render json: exercises.as_json
   end

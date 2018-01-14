@@ -65,12 +65,70 @@
 
 <template id="home-page">
   <div class="container">
-    <h1  class="text-white">Exercises</h1>
-     <div id="map"></div>
+    <h1  class="text-white">Home Page</h1>
+
+    <!--  <div id="map"></div>
     <input type="text" v-model="titleFilter" placeholder="Search by exercise">
     <datalist id="name">
       <option v-for="exercise in exercises">{{ exercise.name }}</option>
     </datalist>
+
+    <div class="row" is="transition-group" name="fade">
+
+      <div class="col-md-4" v-for="exercise in exercises" v-if="isValidExercise(exercise)" v-bind:key="exercise.id">
+        <div class="card mb-2">
+          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
+       <!--    <div class="card-body bg-secondary text-white">
+            <h4 class="card-first name"> Name: {{ exercise.name }}</h4>
+            <p class="card-text ">Description: {{ exercise.description }}</p>
+            <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
+            <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
+      <!--       <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
+           <!--  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
+              Exercise Information
+            </button> -->
+            <!-- <router-link v-bind:to="{ path: '/recipes/' + recipe.id }">More info</router-link> -->
+  <!--         </div>
+        </div>
+      </div>
+    </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+         {{ currentExercise.name }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ currentExercise.name }}
+        <iframe width="420" height="315"
+          src="https://www.youtube.com/embed/XGSy3_Czz8k">
+        </iframe>
+        {{ currentExercise.video_link }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> --> --> -->
+
+</template>
+
+<template id="exercise-page">
+  <div class="container">
+    <h1  class="text-white">Exercises</h1>
+    <input type="text" v-model="titleFilter" placeholder="Search by exercise">
+    <datalist id="name">
+      <option v-for="exercise in exercises">{{ exercise.name }}</option>
+    </datalist>
+    
 
     <div class="row" is="transition-group" name="fade">
 
@@ -120,6 +178,101 @@
 
 </template>
 
+<template id="workout-page">
+  <div class="container">
+    <h1  class="text-white">Workouts</h1>
+    <input type="text" v-model="titleFilter" placeholder="Search by exercise">
+    <datalist id="name">
+      <option v-for="workout in workouts">{{ workout.name }}</option>
+    </datalist>
+
+    <div class="row" is="transition-group" name="fade">
+
+      <div class="col-md-4" v-for="workout in workouts" v-if="isValidWorkout(workout)" v-bind:key="workout.id">
+        <div class="card mb-2">
+          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
+          <div class="card-body bg-secondary text-white">
+            <h4 class="card-first name"> Name: {{ workout.name }}</h4>
+            <p class="card-text ">Description: {{ workout.description }}</p>
+          <!--   <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
+            <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
+            <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentWorkout(workout)">
+              Workout Information
+            </button>
+            <!-- <router-link v-bind:to="{ path: '/recipes/' + recipe.id }">More info</router-link> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+         {{ currentWorkout.name }}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- <div class="modal-body">
+        {{ currentWorkout.name }}
+        <iframe width="420" height="315"
+          src="https://www.youtube.com/embed/XGSy3_Czz8k">
+        </iframe>
+        {{ currentExercise.video_link }}
+      </div> -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</template>
+
+<template id="exercise-workouts-page">
+  <div class="container">
+    <h1>Exercise Workouts</h1>
+    <div class="row">
+
+      <!-- <div class="col-md-4" v-for="ex in exercise_workouts">
+        <div class="card mb-2">
+          <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">{{ ex }}</h4>
+            <p class="card-text exercise">Exercise: {{ ex.exercise_id.workout }}</p>
+            <p class="card-text workouts">Workouts: {{ ex.workout }}</p>
+            <a href="#" class="btn btn-primary">More info</a>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="col-md-4" v-for="workout in workouts">
+        <div class="card mb-2">
+          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
+          <div class="card-body">
+            <h4 class="card-title">{{ workout.name }}</h4>
+            <p v-for="exercise in workout.exercises">
+              Exercise: {{ exercise.name }}
+            </p>
+            <!-- <p class="card-text exercise">Exercise: {{ ex.exercise_id.workout }}</p> -->
+            <!-- <p class="card-text workouts">Workouts: {{ ex.workout }}</p> -->
+            <a href="#" class="btn btn-primary">More info</a>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</template>
+
+
+
 <template id="signup-page">
   <div class="container">
     <h1 class=text-white>Signup</h1>
@@ -162,5 +315,45 @@
       <input type="password" class="form-control" v-model="password">
     </div>
     <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+  </div>
+</template>
+
+
+
+<template id="random-exercise-page">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-2">
+          <div class="card-body">
+            <h4 class="card-title">{{ exercise.name }}</h4>
+            <p class="card-text description">Description: {{ exercise.description }}</p>
+            <p class="card-text video-link">Video Link: {{ exercise.video_link }}</p>
+            <a href="/#/exercises" class="btn btn-primary">Back to all exercises</a>
+            <!-- <router-link v-bind:to="{ path: '/' }">Back to all products</router-link> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>
+
+<template id="random-workout-page">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-2">
+          <div class="card-body">
+            <h4 class="card-title">{{ workout.name }}</h4>
+            <p class="card-text description">Description: {{ workout.description }}</p>
+            <a href="/#/workouts" class="btn btn-primary">Back to all workouts</a>
+        
+            <!-- <router-link v-bind:to="{ path: '/' }">Back to all products</router-link> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </template>

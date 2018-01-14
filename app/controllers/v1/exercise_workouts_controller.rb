@@ -1,9 +1,14 @@
 class V1::ExerciseWorkoutsController < ApplicationController
   def index
     exercise_workouts = ExerciseWorkout.all
-    if params[:searchExerciseId]
-      exercise_workouts = exercise_workouts.where(" exercise_id = ?" , "%#{params[:searchExerciseId]}%")
+    # if params[:searchExerciseId]
+    #   exercise_workouts = exercise_workouts.where(" exercise_id = ?" , "%#{params[:searchExerciseId]}%")
+    if params[:users_workouts]
+      # exercise_workouts = exercise_workouts.where(user_id: current_user.id)
+      exercise_workouts = exercise_workouts.where(user_id: current_user.id)
+      exercise_workouts.sort
     end
+
     render json: exercise_workouts.as_json
   end
 

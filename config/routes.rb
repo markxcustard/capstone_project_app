@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     delete "/users/:id" => "users#destroy"
 
     get "/workouts" => "workouts#index"
+    get "/myworkouts" => "workouts#myworkouts"
     post "/workouts" => "workouts#create"
     get "/workouts/:id" => "workouts#show"
     patch "/workouts/:id" => "workouts#update"

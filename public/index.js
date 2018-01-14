@@ -44,6 +44,104 @@ var HomePage = {
   computed: {}
 };
 
+var ExercisePage = {
+  template: "#exercise-page",
+  data: function() {
+    return {
+      message: "My Exercise App!",
+      exercises: [],
+      currentExercise: {},
+      titleFilter: ""
+    };
+  },
+
+  mounted: function() {},
+
+  created: function() {
+    axios.get("/v1/exercises").then(
+      function(response) {
+        this.exercises = response.data;
+        console.log(this.exercises);
+      }.bind(this)
+    );
+  },
+  methods: {
+    setCurrentExercise: function(inputExercise) {
+      this.currentExercise = inputExercise;
+    },
+    isValidExercise: function(inputExercise) {
+      // return inputRecipe.title.indexOf(this.titleFilter) !== -1;
+      return inputExercise.name.toLowerCase().includes(this.titleFilter);
+    }
+  },
+  computed: {}
+};
+
+var WorkoutPage = {
+  template: "#workout-page",
+  data: function() {
+    return {
+      message: "My Workout App!",
+      workouts: [],
+      currentWorkout: {},
+      titleFilter: ""
+    };
+  },
+
+  mounted: function() {},
+
+  created: function() {
+    axios.get("/v1/workouts").then(
+      function(response) {
+        this.workouts = response.data;
+        console.log(this.workouts);
+      }.bind(this)
+    );
+  },
+  methods: {
+    setCurrentWorkout: function(inputWorkout) {
+      this.currentWorkout = inputWorkout;
+    },
+    isValidWorkout: function(inputWorkout) {
+      // return inputRecipe.title.indexOf(this.titleFilter) !== -1;
+      return inputWorkout.name.toLowerCase().includes(this.titleFilter);
+    }
+  },
+  computed: {}
+};
+
+var ExerciseWorkoutsPage = {
+  template: "#exercise-workouts-page",
+  data: function() {
+    return {
+      message: "Welcome to Vue.js!",
+      exercise_workouts: [],
+      workouts: []
+    };
+  },
+  mounted: function() {
+    axios.get("/v1/exercise_workouts").then(
+      function(response) {
+        console.log(response.data);
+        this.exercise_workouts = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/v1/users/current_user").then(
+      function(response) {
+        console.log("current_user", response.data);
+        this.workouts = response.data.workouts;
+      }.bind(this)
+    );
+  },
+  methods: {
+    setCurrentExerciseWorkout: function(inputExerciseWorkout) {
+      this.currentExerciseWorkout = inputExerciseWorkout;
+    }
+  },
+  computed: {}
+};
+
 var SignupPage = {
   template: "#signup-page",
   data: function() {
@@ -118,13 +216,57 @@ var LogoutPage = {
   }
 };
 
+var RandomExercisesPage = {
+  template: "#random-exercise-page",
+  data: function() {
+    return {
+      exercise: {
+        name: "Sample name",
+        description: "Sample description",
+        video_link: ["Sample video_link"]
+      }
+    };
+  },
+  mounted: function() {
+    axios.get("/v1/exercises?random=true").then(
+      function(response) {
+        this.exercise = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+var RandomWorkoutPage = {
+  template: "#random-workout-page",
+  data: function() {
+    return {
+      workout: {
+        name: "Sample name",
+        description: "Sample description"
+      }
+    };
+  },
+  mounted: function() {
+    axios.get("/v1/workouts?random=true").then(
+      function(response) {
+        this.workout = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
-    // { path: "/recipes/new", component: RecipesNewPage },
-    // { path: "/recipes/:id", component: RecipesShowPage },
-    // { path: "/recipes/:id/edit", component: RecipesEditPage },
-    // { path: "/sample", component: SamplePage },
+    { path: "/exercises", component: ExercisePage },
+    { path: "/workouts", component: WorkoutPage },
+    { path: "/exercise_workouts", component: ExerciseWorkoutsPage },
+    { path: "/random_exercises", component: RandomExercisesPage },
+    { path: "/random_workouts", component: RandomWorkoutPage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage }

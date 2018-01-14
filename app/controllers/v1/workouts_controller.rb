@@ -1,8 +1,11 @@
 class V1::WorkoutsController < ApplicationController
   def index
     workouts = Workout.all
-    if params[:search]
-      workouts = workouts.where("first_name ILIKE ?" , "%#{params[:search]}%")
+    # if current_user
+    #   workouts = current_user.workouts
+    if params[:random]
+      workout = Workout.all
+      workouts = workout.sample  
     end
     render json: workouts.as_json
   end
@@ -14,6 +17,7 @@ class V1::WorkoutsController < ApplicationController
   def create
     workout = Workout.new(
     name: params[:name],
+    description: params[:description],
     duration_work: params[:duration_work],
     duration_rest:  params[:duration_rest],
     duration_total: params[:duration_total],
@@ -41,6 +45,14 @@ class V1::WorkoutsController < ApplicationController
     workout = Workout.find_by(id: params[:workout_id])
     workout.destroy 
     render json: {message: "Workout successfully removed!!"}
+  end
+
+  def my_workouts
+    workouts = []
+    if current_user
+      workouts = current_user.workouts
+    end
+    render json: workouts.as_json
   end
 end
 

@@ -46,16 +46,16 @@ elsif input_option == "5"
   params = {}
   print "Workout name: "
   params[:name] = gets.chomp
-  print "Default Duration Work: "
-  params[:default_duration_work] = gets.chomp.to_i
-  print "Default Duration Rest: "
-  params[:default_duration_rest] = gets.chomp.to_i
-  print "Default Duration Total: "
-  params[:default_duration_total] = gets.chomp.to_i
-  print "Default Reps: "
-  params[:default_reps] = gets.chomp.to_i
-  print "Default Rounds: "
-  params[:default_rounds] = gets.chomp.to_i
+  print "Duration Work: "
+  params[:duration_work] = gets.chomp.to_i
+  print "Duration Rest: "
+  params[:duration_rest] = gets.chomp.to_i
+  print "Duration Total: "
+  params[:duration_total] = gets.chomp.to_i
+  print "Reps: "
+  params[:reps] = gets.chomp.to_i
+  print "Rounds: "
+  params[:rounds] = gets.chomp.to_i
   # params.delete_if { |_key, value| value.empty? }
   response = Unirest.post("http://localhost:3000/v1/workouts", parameters: params)
   workout = response.body
@@ -81,7 +81,7 @@ elsif input_option == "5"
     print "Password: "
     params[:password] = gets.chomp
     response = Unirest.post(
-      "http://localhost:3000/v1/user_token",
+      "http://localhost:3000/user_token",
       parameters: {auth: {email: params[:email], password: params[:password]}}
     )
     pp response.body

@@ -30,4 +30,13 @@ class V1::UsersController < ApplicationController
       render json: {message: "User Successfully Removed!!!"}
     end
   end
+
+  def show
+    if params[:id] == "current_user" && current_user
+      user = current_user
+    else
+      user = User.find_by(id: params[:id])
+    end
+    render json: user.as_json
+  end
 end
