@@ -76,9 +76,77 @@ var ExercisePage = {
   },
   computed: {}
 };
+var ChooseYourExercisesPage = {
+  template: "#choose-exercises-page",
+  data: function() {
+    return {
+      message: "",
+      exercises: [],
+      currentExercise: {},
+      titleFilter: ""
+    };
+  },
+
+  mounted: function() {},
+
+  created: function() {
+    axios.get("/v1/exercises").then(
+      function(response) {
+        this.exercises = response.data;
+        console.log(this.exercises);
+      }.bind(this)
+    );
+  },
+  methods: {
+    setCurrentExercise: function(inputExercise) {
+      this.currentExercise = inputExercise;
+    },
+    isValidExercise: function(inputExercise) {
+      // return inputRecipe.title.indexOf(this.titleFilter) !== -1;
+      return inputExercise.name.toLowerCase().includes(this.titleFilter);
+    }
+  },
+  computed: {}
+};
 
 var WorkoutPage = {
   template: "#workout-page",
+  data: function() {
+    return {
+      message: "My Workout App!",
+      workouts: [],
+      currentWorkout: {},
+      titleFilter: ""
+    };
+  },
+
+  mounted: function() {},
+
+  created: function() {
+    axios.get("/v1/workouts").then(
+      function(response) {
+        this.workouts = response.data;
+        console.log(this.workouts);
+      }.bind(this)
+    );
+  },
+  methods: {
+    addWorkout: function(inputWorkout) {
+      this.currentWorkout = inputWorkout;
+    },
+    setCurrentWorkout: function(inputWorkout) {
+      this.currentWorkout = inputWorkout;
+    },
+    isValidWorkout: function(inputWorkout) {
+      // return inputRecipe.title.indexOf(this.titleFilter) !== -1;
+      return inputWorkout.name.toLowerCase().includes(this.titleFilter);
+    }
+  },
+  computed: {}
+};
+
+var ChooseWorkoutsPage = {
+  template: "#choose-workouts-page",
   data: function() {
     return {
       message: "My Workout App!",
@@ -115,18 +183,10 @@ var ExerciseWorkoutsPage = {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      exercise_workouts: [],
       workouts: []
     };
   },
   mounted: function() {
-    axios.get("/v1/exercise_workouts?users_workouts=true").then(
-      function(response) {
-        console.log(response.data);
-        this.exercise_workouts = response.data;
-      }.bind(this)
-    );
-
     axios.get("/v1/users/current_user").then(
       function(response) {
         console.log("current_user", response.data);
@@ -139,7 +199,15 @@ var ExerciseWorkoutsPage = {
       this.currentExerciseWorkout = inputExerciseWorkout;
     }
   },
-  computed: {}
+  computed: {
+    sortedWorkouts: function() {
+      return this.workouts.sort(
+        function(workout1, workout2) {
+          return workout1[this.sortAttribute] > workout2[this.sortAttribute];
+        }.bind(this)
+      );
+    }
+  }
 };
 
 var SignupPage = {
@@ -263,7 +331,9 @@ var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/exercises", component: ExercisePage },
+    { path: "/choose_exercises", component: ChooseYourExercisesPage },
     { path: "/workouts", component: WorkoutPage },
+    { path: "/choose_workouts", component: ChooseWorkoutsPage },
     { path: "/exercise_workouts", component: ExerciseWorkoutsPage },
     { path: "/random_exercises", component: RandomExercisesPage },
     { path: "/random_workouts", component: RandomWorkoutPage },

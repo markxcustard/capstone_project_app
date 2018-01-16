@@ -87,25 +87,26 @@
     <h1  class="text-white">Exercises</h1>
     <input type="text" v-model="titleFilter" placeholder="Search by Exercise">
     <datalist id="name">
+
       <option v-for="exercise in exercises">{{ exercise.name }}</option>
     </datalist>
+    <br>
+    <br>
+    <br>
     
 
     <div class="row" is="transition-group" name="fade">
 
       <div class="col-md-4" v-for="exercise in exercises" v-if="isValidExercise(exercise)" v-bind:key="exercise.id">
         <div class="card mb-2">
-          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
+          
           <div class="card-body bg-secondary text-white">
             <h4 class="card-first name"> Name: {{ exercise.name }}</h4>
-            <!-- <p class="card-text ">Description: {{ exercise.description }}</p> -->
-           <!--  <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
-            <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
-            <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
+            
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
               Exercise Information
             </button>
-            <!-- <router-link v-bind:to="{ path: '/recipes/' + recipe.id }">More info</router-link> -->
+          
           </div>
         </div>
       </div>
@@ -129,7 +130,7 @@
         <iframe width="460" height="315"
           v-bind:src="currentExercise.video_link">
         </iframe>
-        <!-- {{ currentExercise.video_link }} -->
+        
       </div>
         
       <div class="modal-footer">
@@ -141,7 +142,75 @@
 
 </template>
 
+<template id="choose-workouts-page">
+  <div class="container">
+    <h1  class="text-white">Choose your Workout</h1>
+    <input type="text" v-model="titleFilter" placeholder="Search by Workouts">
+    <br>
+    <br>
+    <br>
+    <datalist id="name">
+      <option v-for="workout in workouts">{{ workout.name }}</option>
+    </datalist>
+    
+
+    <div class="row" is="transition-group" name="fade">
+
+      <div class="col-md-4" v-for="workout in workouts" v-if="isValidWorkout(workout)" v-bind:key="workout.id">
+        <div class="card mb-2">
+          
+          <div class="card-body bg-secondary text-white">
+            <h4 class="card-first name"> Name: {{ workout.name }}</h4>
+            
+           <!--  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
+              Exercise Information
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <template id="workout-page">
+  <div class="container">
+    <h1  class="text-white">Workouts</h1>
+    <input type="text" v-model="titleFilter" placeholder="Search by Workouts">
+    <datalist id="name">
+      <option v-for="workout in workouts">{{ workout.name }}</option>
+    </datalist>
+    <br>
+    <br>
+    <br>
+
+    <div class="row" is="transition-group" name="fade">
+
+      <div class="col-md-4" v-for="workout in workouts" v-if="isValidWorkout(workout)" v-bind:key="workout.id">
+        <div class="card mb-2">
+          <div class="card-body bg-secondary text-white">
+            <h4 class="card-first name"> Name: {{ workout.name }}</h4>
+          
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentWorkout(workout)">
+              Workout Information
+            </button>
+            <br>
+            <br>
+            <p>
+              <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Link with href
+              </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- <template id="workout-page">
   <div class="container">
     <h1  class="text-white">Workouts</h1>
     <input type="text" v-model="titleFilter" placeholder="Search by Workouts">
@@ -151,23 +220,31 @@
 
     <div class="row" is="transition-group" name="fade">
 
-      <div class="col-md-4" v-for="workout in workouts" v-if="isValidWorkout(workout)" v-bind:key="workout.id">
+      <div class="col-md-4" v-for="(workout, index) in workouts" v-if="isValidWorkout(workout)" v-bind:key="workout.id">
         <div class="card mb-2">
-          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
           <div class="card-body bg-secondary text-white">
             <h4 class="card-first name"> Name: {{ workout.name }}</h4>
-           <!--  <p class="card-text ">Description: {{ workout.description }}</p> -->
-          <!--   <p class="card-text email">Video Link: {{ exercise.video_link }}</p> -->
-            <!-- <p class="card-text phone number">Phone Number: {{ contact.phone_number }}</p> -->
-            <!-- <a v-bind:href="'/#/recipes/' + recipe.id" class="btn btn-primary">More info</a> -->
+          
             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentWorkout(workout)">
               Workout Information
             </button>
-            <!-- <router-link v-bind:to="{ path: '/recipes/' + recipe.id }">More info</router-link> -->
+            <br>
+            <br>
+            <p>
+              <a class="btn btn-primary" data-toggle="collapse" href="'#collapseExample' + 'index'" role="button" aria-expanded="false" aria-controls="'collapseExample' + 'index'" v-on:click="addWorkout(workout)">
+                Add Workout
+              </a>
+            </p>
+            <div class="collapse" id="'collapseExample' + 'index'">
+              <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+ -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -197,33 +274,61 @@
 
 </template>
 
+<template id="choose-exercises-page">
+  <div class="container">
+    <h1  class="text-white">Choose your Exercises</h1>
+    <input type="text" v-model="titleFilter" placeholder="Search by Exercises">
+    <br>
+    <br>
+    <br>
+
+    <datalist id="name">
+
+      <option v-for="exercise in exercises">{{ exercise.name }}</option>
+    </datalist>
+    
+
+    <div class="row" is="transition-group" name="fade">
+
+      <div class="col-md-4" v-for="exercise in exercises" v-if="isValidExercise(exercise)" v-bind:key="exercise.id">
+        <div class="card mb-2">
+          
+          <div class="card-body bg-secondary text-white">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                  </div>
+                </div>
+              </div>
+            <h4 class="card-first name"> Name: {{ exercise.name }}</h4>
+            
+           <!--  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
+              Exercise Information
+            </button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <template id="exercise-workouts-page">
   <div class="container">
     <h1>Exercise Workouts</h1>
     <div class="row">
 
-      <!-- <div class="col-md-4" v-for="ex in exercise_workouts">
-        <div class="card mb-2">
-          <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">{{ ex }}</h4>
-            <p class="card-text exercise">Exercise: {{ ex.exercise_id.workout }}</p>
-            <p class="card-text workouts">Workouts: {{ ex.workout }}</p>
-            <a href="#" class="btn btn-primary">More info</a>
-          </div>
-        </div>
-      </div> -->
 
-      <div class="col-md-4" v-for="workout in workouts">
+
+      <div class="col-md-4" v-for="workout in sortedWorkouts">
         <div class="card mb-2">
-          <!-- <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap"> -->
+          
           <div class="card-body">
             <h4 class="card-title">{{ workout.name }}</h4>
             <p v-for="exercise in workout.exercises">
               Exercise: {{ exercise.name }}
             </p>
-            <!-- <p class="card-text exercise">Exercise: {{ ex.exercise_id.workout }}</p> -->
-            <!-- <p class="card-text workouts">Workouts: {{ ex.workout }}</p> -->
+            
             <a href="#" class="btn btn-primary">More info</a>
           </div>
         </div>
