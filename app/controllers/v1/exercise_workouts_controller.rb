@@ -22,7 +22,8 @@ class V1::ExerciseWorkoutsController < ApplicationController
     exercise_workout = ExerciseWorkout.new(
       exercise_id: params[:exercise_id],
       workout_id: params[:workout_id],
-      user_id:  params[:user_id]
+      # user_id:  params[:user_id]
+      user_id:  current_user.id
       )
     exercise_workout.save
     render json: exercise_workout.as_json

@@ -83,6 +83,8 @@ var ChooseYourExercisesPage = {
       message: "",
       exercises: [],
       currentExercise: {},
+      workouts: [],
+      workoutId: 1,
       titleFilter: ""
     };
   },
@@ -90,9 +92,21 @@ var ChooseYourExercisesPage = {
   mounted: function() {},
 
   created: function() {
+    axios.get("/v1/workouts").then(
+      function(response) {
+        this.workouts = response.data;
+        console.log(this.workouts);
+      }.bind(this)
+    );
+
     axios.get("/v1/exercises").then(
       function(response) {
-        this.exercises = response.data;
+        var exercises = [];
+        response.data.forEach(function(exercise) {
+          exercise.selected = false;
+          exercises.push(exercise);
+        });
+        this.exercises = exercises;
         console.log(this.exercises);
       }.bind(this)
     );
@@ -100,6 +114,40 @@ var ChooseYourExercisesPage = {
   methods: {
     setCurrentExercise: function(inputExercise) {
       this.currentExercise = inputExercise;
+    },
+    createWorkout: function() {
+      // console.log("selected workout:", this.workoutId);
+      // var selectedExerciseIds = [];
+      this.exercises.forEach(
+        function(exercise) {
+          if (exercise.selected === true) {
+            // selectedExerciseIds.push(exercise.id);
+            var params = {
+              workout_id: this.workoutId,
+              exercise_id: exercise.id
+            };
+            axios
+              .post("/v1/exercise_workouts", params)
+              .then(function(response) {
+                console.log(
+                  "successfully created exercise_workout",
+                  response.data,
+                  params
+                );
+              });
+          }
+        }.bind(this)
+      );
+      // console.log("selected exercises:", selectedExerciseIds);
+
+      //     var params = {
+      //       exercise_id: exercise.exercise_id,
+      //       workout_id: this.workoutName
+      //     };
+
+      //     axios.post("/v1/exercise_workouts", params);
+      //   }
+      // });
     },
     isValidExercise: function(inputExercise) {
       // return inputRecipe.title.indexOf(this.titleFilter) !== -1;

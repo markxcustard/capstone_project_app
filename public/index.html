@@ -202,7 +202,7 @@
             </p>
             <div class="collapse" id="collapseExample">
               <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                
               </div>
             </div>
           </div>
@@ -287,29 +287,20 @@
       <option v-for="exercise in exercises">{{ exercise.name }}</option>
     </datalist>
     
-
-    <div class="row" is="transition-group" name="fade">
-
-      <div class="col-md-4" v-for="exercise in exercises" v-if="isValidExercise(exercise)" v-bind:key="exercise.id">
-        <div class="card mb-2">
-          
-          <div class="card-body bg-secondary text-white">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input">
-                  </div>
-                </div>
-              </div>
-            <h4 class="card-first name"> Name: {{ exercise.name }}</h4>
-            
-           <!--  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">
-              Exercise Information
-            </button> -->
-          </div>
-        </div>
-      </div>
+    <h2 style="color: white">Choose a workout type</h2>
+    <select name="" id="" v-model="workoutId">
+      <option v-bind:value="workout.id" v-for="workout in workouts">
+        {{ workout.name }} 
+      </option>
+    </select>
+    <h2 style="color: white">Choose the exercises</h2>
+    <div v-for="exercise in exercises">
+      <input type="checkbox" v-model="exercise.selected"><label for="" style="color: white">{{ exercise.name }}</label>
     </div>
+    <button v-on:click="createWorkout()"  type="button" class="btn btn-primary btn-lg">Submit</button>
+
+
+    
   </div>
 </template>
 
