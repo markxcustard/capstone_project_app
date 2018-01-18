@@ -210,42 +210,6 @@
       </div>
     </div>
 
-<!-- <template id="workout-page">
-  <div class="container">
-    <h1  class="text-white">Workouts</h1>
-    <input type="text" v-model="titleFilter" placeholder="Search by Workouts">
-    <datalist id="name">
-      <option v-for="workout in workouts">{{ workout.name }}</option>
-    </datalist>
-
-    <div class="row" is="transition-group" name="fade">
-
-      <div class="col-md-4" v-for="(workout, index) in workouts" v-if="isValidWorkout(workout)" v-bind:key="workout.id">
-        <div class="card mb-2">
-          <div class="card-body bg-secondary text-white">
-            <h4 class="card-first name"> Name: {{ workout.name }}</h4>
-          
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentWorkout(workout)">
-              Workout Information
-            </button>
-            <br>
-            <br>
-            <p>
-              <a class="btn btn-primary" data-toggle="collapse" href="'#collapseExample' + 'index'" role="button" aria-expanded="false" aria-controls="'collapseExample' + 'index'" v-on:click="addWorkout(workout)">
-                Add Workout
-              </a>
-            </p>
-            <div class="collapse" id="'collapseExample' + 'index'">
-              <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
- -->
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
