@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     post "/exercise_workouts" => "exercise_workouts#create"
     get "/exercise_workouts/:id" => "exercise_workouts#show"
     delete "/exercise_workouts/:id" => "exercise_workouts#destroy"
+
+    get "/yelps" => "yelps#index"
   end
 end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

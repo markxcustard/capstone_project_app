@@ -211,7 +211,8 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
-a:focus, a:active {
+a:focus,
+a:active {
   outline: none;
 }
 

@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'tty-prompt'
+# gem 'tty-prompt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
@@ -19,6 +19,8 @@ gem 'puma', '~> 3.7'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'knock'
+gem 'figaro'
+gem 'unirest'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

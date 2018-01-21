@@ -7,17 +7,62 @@ var HomePage = {
       message: "My Exercise App!",
       exercises: [],
       currentExercise: {},
-      titleFilter: ""
+      titleFilter: "",
+      inputAddress: "60714",
+      yelpData: {},
+      mapPlace: {},
+      coordinates: {}
     };
   },
+  watch: {
+    yelpData: function() {
+      var coordinates = {};
 
+      var convertSearchPlace = this.yelpData.businesses[0].location.address1
+        .split(" ")
+        .join("+");
+      console.log(convertSearchPlace);
+
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${convertSearchPlace}`
+        )
+        .then(
+          function(response) {
+            this.coordinates = response.data.results[0].geometry.location;
+            console.log(response.data.results[0].geometry.location);
+            var map = new google.maps.Map(document.getElementById("map"), {
+              center: this.coordinates,
+              zoom: 12
+            });
+          }.bind(this)
+        );
+
+      console.log(this.coordinates);
+
+      // this.mapPlaces.forEach(function(mapPlace) {
+      //   // var infowindow = new google.maps.InfoWindow({
+      //   //   content: contentString
+      //   // });
+
+      //   var marker = new google.maps.Marker({
+      //     position: mapPlace.center,
+      //     map: map,
+      //     name: mapPlace.name
+      //   });
+      //   // marker.addListener("click", function() {
+      //   //   infowindow.open(map, marker);
+      //   // });
+      // });
+    }
+  },
   mounted: function() {
-    axios.get("/v1/exercises").then(
+    axios.get("/v1/yelps?address=bh235rq").then(
       function(response) {
-        this.exercises = response.data;
+        this.yelpData = response.data;
+        console.log("yelpData", this.yelpData);
       }.bind(this)
     );
-    // console.log(google);
     // var map = new google.maps.Map(document.getElementById("map"), {
     //   center: { lat: 41.8781, lng: -87.6298 },
     //   zoom: 12
