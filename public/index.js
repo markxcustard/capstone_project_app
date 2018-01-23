@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios, google */
+/* global Vue, VueRouter, axios, google, initTheme */
 
 var HomePage = {
   template: "#home-page",
@@ -63,6 +63,7 @@ var HomePage = {
         console.log("yelpData", this.yelpData);
       }.bind(this)
     );
+    initTheme();
     // var map = new google.maps.Map(document.getElementById("map"), {
     //   center: { lat: 41.8781, lng: -87.6298 },
     //   zoom: 12
@@ -100,7 +101,10 @@ var ExercisePage = {
     };
   },
 
-  mounted: function() {},
+  mounted: function() {
+    // setTimeout(initTheme, 1000);
+    initTheme();
+  },
 
   created: function() {
     axios.get("/v1/exercises").then(
@@ -213,7 +217,10 @@ var WorkoutPage = {
     };
   },
 
-  mounted: function() {},
+  mounted: function() {
+    // setTimeout(initTheme, 1000);
+    initTheme();
+  },
 
   created: function() {
     axios.get("/v1/workouts").then(
@@ -286,6 +293,7 @@ var ExerciseWorkoutsPage = {
         this.workouts = response.data.workouts;
       }.bind(this)
     );
+    initTheme();
   },
   methods: {
     setCurrentExerciseWorkout: function(inputExerciseWorkout) {

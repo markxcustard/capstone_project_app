@@ -14,7 +14,7 @@ class Workout < ApplicationRecord
       reps: reps,
       rounds: rounds,
       description: description,
-      exercises: exercises.as_json
+      exercises: exercise_workouts.order(:id).map {|ew| ew.exercise }.as_json
     }
   end
 end
