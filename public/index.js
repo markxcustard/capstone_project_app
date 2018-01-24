@@ -11,58 +11,65 @@ var HomePage = {
       inputAddress: "60714",
       yelpData: {},
       mapPlace: {},
-      coordinates: {}
+      coordinates: {},
+      searchPlace: ""
     };
   },
   watch: {
     yelpData: function() {
-      var coordinates = {};
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 12
+      });
+      console.log("the map is", map);
 
-      var convertSearchPlace = this.yelpData.businesses[0].location.address1
-        .split(" ")
-        .join("+");
-      console.log(convertSearchPlace);
+      this.yelpData.businesses.forEach(function(yelpAddy) {
+        var contentString =
+          '<div id="content" style="color: black">' +
+          '<div id="siteNotice">' +
+          "</div>" +
+          `<h4 id="firstHeading" class="firstHeading" style="color: black">${
+            yelpAddy.name
+          }</h4>` +
+          '<div id="bodyContent" style="color: black">' +
+          `<p>${yelpAddy.rating}</p>` +
+          `<p>${yelpAddy.name}</p>` +
+          `<a id="bodyContent" style="color: black" href="${
+            yelpAddy.url
+          }">Go to Yelp` +
+          "</div>" +
+          "</div>";
 
-      axios
-        .get(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${convertSearchPlace}`
-        )
-        .then(
-          function(response) {
-            this.coordinates = response.data.results[0].geometry.location;
-            console.log(response.data.results[0].geometry.location);
-            var map = new google.maps.Map(document.getElementById("map"), {
-              center: this.coordinates,
-              zoom: 12
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        var yelpAddress =
+          yelpAddy.location.display_address[0] +
+          ", " +
+          yelpAddy.location.display_address[1];
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: yelpAddress }, function(results, status) {
+          if (status === "OK") {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              position: results[0].geometry.location,
+              map: map,
+              Name: yelpAddy.name
             });
-          }.bind(this)
-        );
-
-      console.log(this.coordinates);
-
-      // this.mapPlaces.forEach(function(mapPlace) {
-      //   // var infowindow = new google.maps.InfoWindow({
-      //   //   content: contentString
-      //   // });
-
-      //   var marker = new google.maps.Marker({
-      //     position: mapPlace.center,
-      //     map: map,
-      //     name: mapPlace.name
-      //   });
-      //   // marker.addListener("click", function() {
-      //   //   infowindow.open(map, marker);
-      //   // });
-      // });
+            marker.addListener("click", function() {
+              infowindow.open(map, marker);
+            });
+          } else {
+            alert(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
+        });
+      });
     }
   },
   mounted: function() {
-    axios.get("/v1/yelps?address=bh235rq").then(
-      function(response) {
-        this.yelpData = response.data;
-        console.log("yelpData", this.yelpData);
-      }.bind(this)
-    );
     initTheme();
     // var map = new google.maps.Map(document.getElementById("map"), {
     //   center: { lat: 41.8781, lng: -87.6298 },
@@ -79,6 +86,17 @@ var HomePage = {
     );
   },
   methods: {
+    searchPlaces: function() {
+      console.log("searchPlaces....");
+      var convertSearchPlaces = this.searchPlace.split(" ").join("+");
+      axios.get(`/v1/yelps?address=${convertSearchPlaces}`).then(
+        function(response) {
+          this.yelpData = response.data;
+          console.log("yelpData", this.yelpData);
+        }.bind(this)
+      );
+    },
+
     setCurrentExercise: function(inputExercise) {
       this.currentExercise = inputExercise;
     },
@@ -256,7 +274,9 @@ var ChooseWorkoutsPage = {
     };
   },
 
-  mounted: function() {},
+  mounted: function() {
+    initTheme();
+  },
 
   created: function() {
     axios.get("/v1/workouts").then(
