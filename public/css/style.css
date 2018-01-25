@@ -160,7 +160,7 @@ tbody {
 /* 2 Layout
 ----------------------------------------------------------------------------- */
 .page-wrapper {
-  background-color: #ffffff;
+  background-color: #d3d3d3;
 }
 
 .header-top:not(.banner) {
@@ -3362,9 +3362,9 @@ h5 + .separator {
 .default-translucent-bg .btn-default-transparent.active,
 .default-bg .show > .dropdown-toggle.btn-default-transparent,
 .default-translucent-bg .show > .dropdown-toggle.btn-default-transparent {
-  color: #ffffff;
+  color: #000000;
   background-color: transparent;
-  border-color: #ffffff;
+  border-color: #000000;
 }
 
 .dark .btn-default {

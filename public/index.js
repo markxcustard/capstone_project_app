@@ -36,7 +36,7 @@ var HomePage = {
           `<p>${yelpAddy.name}</p>` +
           `<a id="bodyContent" style="color: black" href="${
             yelpAddy.url
-          }">Go to Yelp` +
+          }" target="_blank">Go to Yelp` +
           "</div>" +
           "</div>";
 
@@ -71,20 +71,21 @@ var HomePage = {
   },
   mounted: function() {
     initTheme();
-    // var map = new google.maps.Map(document.getElementById("map"), {
-    //   center: { lat: 41.8781, lng: -87.6298 },
-    //   zoom: 12
-    // });
+
+    var map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 12
+    });
   },
 
-  created: function() {
-    axios.get("/v1/exercises").then(
-      function(response) {
-        this.exercises = response.data;
-        console.log(this.exercises);
-      }.bind(this)
-    );
-  },
+  // created: function() {
+  //   axios.get("/v1/exercises").then(
+  //     function(response) {
+  //       this.exercises = response.data;
+  //       console.log(this.exercises);
+  //     }.bind(this)
+  //   );
+  // },
   methods: {
     searchPlaces: function() {
       console.log("searchPlaces....");
@@ -423,7 +424,15 @@ var RandomExercisesPage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    reloadPage: function() {
+      axios.get("/v1/exercises?random=true").then(
+        function(response) {
+          this.exercise = response.data;
+        }.bind(this)
+      );
+    }
+  },
   computed: {}
 };
 
@@ -444,7 +453,15 @@ var RandomWorkoutPage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    reloadPage: function() {
+      axios.get("/v1/workouts?random=true").then(
+        function(response) {
+          this.workout = response.data;
+        }.bind(this)
+      );
+    }
+  },
   computed: {}
 };
 
@@ -471,6 +488,13 @@ var app = new Vue({
     var jwt = localStorage.getItem("jwt");
     if (jwt) {
       axios.defaults.headers.common["Authorization"] = jwt;
+    }
+  },
+  watch: {
+    $route: function(to, from) {
+      if (to.path === "/exercises") {
+        window.location.reload();
+      }
     }
   }
 });

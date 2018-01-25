@@ -376,7 +376,7 @@
 
       <!-- footer top start -->
       <!-- ================ -->
-      <div class="light-gray-bg footer-top border-clear">
+     <!--  <div class="light-gray-bg footer-top border-clear">
         <div class="container">
           <div class="row">
             <div class="col-12">
@@ -399,11 +399,11 @@
 
       <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
       <!-- ================ -->
-      <footer id="footer" class="clearfix">
+     <!--  <footer id="footer" class="clearfix">
 
         <!-- .footer start -->
         <!-- ================ -->
-        <div class="footer">
+      <!--   <div class="footer">
           <div class="container-fluid">
             <div class="footer-inner">
               <div class="row justify-content-xl-center">
@@ -466,8 +466,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <br>
+              </div> -->
+              <br> -->
               <!-- section start -->
               <!-- ================ -->
               <section id="collapseMap">
@@ -496,7 +496,7 @@
 
       </footer>
       <!-- footer end -->
-    </div>
+    </div> -->
     <!-- page-wrapper end -->
 
     <!-- JavaScript files placed at the end of the document so the pages load faster -->
@@ -665,8 +665,10 @@
           <div class="row">
             <div class="col-lg-12">
               <input v-on:keyup.enter="searchPlaces()" type="text" v-model="searchPlace" placeholder="Enter your City">
+
               <!-- <input id="submit" type="button" value="Geocode"> -->
               <div id="map"></div>
+
             </div>
           </div>
         </div>
@@ -718,7 +720,7 @@
                         </div>
                         <div class="body text-center padding-horizontal-clear">
                           <!-- <p>{{ exercise.description }}</p> -->
-                          <p style="color: #686868"><a class="btn btn" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">More Info</a></p>
+                          <p style="color: #000000"><a class="btn btn" data-toggle="modal" data-target="#exampleModal" v-on:click="setCurrentExercise(exercise)">More Info</a></p>
                         </div>
                       </div>
                     </div>
@@ -899,21 +901,29 @@
    
 
     <datalist id="name">
+    
 
       <option v-for="exercise in exercises">{{ exercise.name }}</option>
     </datalist>
     
-    <h2 style="color: white">Choose a workout type</h2>
+    
+    <h4 style="color: black">Choose a Workout:</h4>
+    <br>
     <select name="" id="" v-model="workoutId">
       <option v-bind:value="workout.id" v-for="workout in workouts">
         {{ workout.name }} 
       </option>
+      <br>
+      <br>
     </select>
-    <h4 style="color: black">Choose the exercises</h4>
-    <div v-for="exercise in exercises">
+    <br>
+    <br>
+    <h4 style="color: black">Choose the Exercises:</h4>
+    <br>
+    <div class="border border-white" style="margin-right: 950px" v-for="exercise in exercises">
       <input type="checkbox" v-model="exercise.selected"><label for="" style="color: black">{{ exercise.name }}</label>
     </div>
-    <button v-on:click="createWorkout()"  type="button" class="btn btn-primary btn-lg">Submit</button>
+    <button v-on:click="createWorkout()"  type="button" class="btn btn btn-lg">Submit</button>
 
 
     
@@ -926,12 +936,12 @@
   <div class="container text-center">
     <div class="row">
       <div class="col-md-6" style="margin-left: 310px;">
-        <div class="card mb-2">
+        <div class="card mb-2 header dark-bg">
           <div class="card-body">
             <h4 class="card-title">{{ exercise.name }}</h4>
             <p class="card-text description">Description: {{ exercise.description }}</p>
             
-            <a href="/#/random_exercises" class="btn btn-primary">Try Again!!</a>
+            <button v-on:click="reloadPage()" class="btn btn-primary">Try Again!!</button>
             <!-- <router-link v-bind:to="{ path: '/' }">Back to all products</router-link> -->
           </div>
         </div>
@@ -945,11 +955,11 @@
   <div class="container text-center">
     <div class="row">
       <div class="col-md-6" style="margin-left: 310px;">
-        <div class="card mb-2">
+        <div class="card mb-2 header dark-bg">
           <div class="card-body">
             <h4 class="card-title">{{ workout.name }}</h4>
             <p class="card-text description">Description: {{ workout.description }}</p>
-            <a href="/#/random_workouts" class="btn btn-primary">Try Again!!</a>
+            <button v-on:click="reloadPage()" class="btn btn-primary">Try Again!!</button>
         
             <!-- <router-link v-bind:to="{ path: '/' }">Back to all products</router-link> -->
           </div>
